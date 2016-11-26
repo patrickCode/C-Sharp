@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssFeedAsync", "RssFeedAsync\RssFeedAsync.csproj", "{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssFeedAndroid", "RssFeedAndroid\RssFeedAndroid.csproj", "{C55EE927-E1DC-4E04-A921-9AE2210D2486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginAsync", "LoginAsync\LoginAsync.csproj", "{44ACF646-D2A6-4824-B800-C0676C0F6A08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginAsyncNew", "LoginAsyncNew\LoginAsyncNew.csproj", "{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAsync", "WebAsync\WebAsync.csproj", "{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C55EE927-E1DC-4E04-A921-9AE2210D2486}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{44ACF646-D2A6-4824-B800-C0676C0F6A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44ACF646-D2A6-4824-B800-C0676C0F6A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44ACF646-D2A6-4824-B800-C0676C0F6A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44ACF646-D2A6-4824-B800-C0676C0F6A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pratikvsb.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = RssFeedAsync\\RssFeedAsync.csproj
+		SccProjectName1 = RssFeedAsync
+		SccLocalPath1 = RssFeedAsync
+		SccProjectUniqueName2 = RssFeedAndroid\\RssFeedAndroid.csproj
+		SccProjectName2 = RssFeedAndroid
+		SccLocalPath2 = RssFeedAndroid
+		SccProjectUniqueName3 = LoginAsync\\LoginAsync.csproj
+		SccProjectName3 = LoginAsync
+		SccLocalPath3 = LoginAsync
+		SccProjectUniqueName4 = LoginAsyncNew\\LoginAsyncNew.csproj
+		SccProjectName4 = LoginAsyncNew
+		SccLocalPath4 = LoginAsyncNew
+		SccProjectUniqueName5 = WebAsync\\WebAsync.csproj
+		SccProjectName5 = WebAsync
+		SccLocalPath5 = WebAsync
+	EndGlobalSection
+EndGlobal

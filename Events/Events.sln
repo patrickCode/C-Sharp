@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAndDelegatesBasic", "ConsoleApplication1\EventAndDelegatesBasic.csproj", "{FFBABA46-63A6-4E47-B7A1-DA7AC1856575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentToComponentComm", "ComponentToComponentComm\ComponentToComponentComm.csproj", "{E2875429-FC4F-421C-B5B0-F47E1CB1E044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheadsAndDelegates", "..\..\..\Documents\Pluralsight Training Materials\Event. Delegates and Lamdas\Before\AsyncDelegatesAndThreading\AsyncDelegatesAndThreading\TheadsAndDelegates.csproj", "{0D0E29E4-AE37-4058-8159-E7D67C8DDB9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFBABA46-63A6-4E47-B7A1-DA7AC1856575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBABA46-63A6-4E47-B7A1-DA7AC1856575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBABA46-63A6-4E47-B7A1-DA7AC1856575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBABA46-63A6-4E47-B7A1-DA7AC1856575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2875429-FC4F-421C-B5B0-F47E1CB1E044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2875429-FC4F-421C-B5B0-F47E1CB1E044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2875429-FC4F-421C-B5B0-F47E1CB1E044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2875429-FC4F-421C-B5B0-F47E1CB1E044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D0E29E4-AE37-4058-8159-E7D67C8DDB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0E29E4-AE37-4058-8159-E7D67C8DDB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D0E29E4-AE37-4058-8159-E7D67C8DDB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0E29E4-AE37-4058-8159-E7D67C8DDB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pratikvsb.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConsoleApplication1\\EventAndDelegatesBasic.csproj
+		SccProjectName1 = ConsoleApplication1
+		SccLocalPath1 = ConsoleApplication1
+		SccProjectUniqueName2 = ComponentToComponentComm\\ComponentToComponentComm.csproj
+		SccProjectName2 = ComponentToComponentComm
+		SccLocalPath2 = ComponentToComponentComm
+		SccProjectUniqueName3 = ..\\..\\..\\Documents\\Pluralsight\u0020Training\u0020Materials\\Event.\u0020Delegates\u0020and\u0020Lamdas\\Before\\AsyncDelegatesAndThreading\\AsyncDelegatesAndThreading\\TheadsAndDelegates.csproj
+		SccProjectName3 = ConsoleApplication1/AsyncDelegatesAndThreading
+		SccLocalPath3 = ..\\..\\..\\Documents\\Pluralsight\u0020Training\u0020Materials\\Event.\u0020Delegates\u0020and\u0020Lamdas\\Before\\AsyncDelegatesAndThreading\\AsyncDelegatesAndThreading
+	EndGlobalSection
+EndGlobal

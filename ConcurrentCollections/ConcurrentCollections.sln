@@ -1,0 +1,148 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-1 Lesson 1 - Simple Queue", "ConcurrentCollections\Mod-1 Lesson 1 - Simple Queue.csproj", "{DF925B27-5CB3-4F43-8611-A9189916B65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-1 Lesson 2 - Multithreaded", "Mod-1 Lesson 2 - Multithreaded\Mod-1 Lesson 2 - Multithreaded.csproj", "{9220F0BC-70C6-40B1-9723-45927CA78A7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-2 Lesson 1 - Basic Dictionary Ops", "Mod-2 Lesson 1\Mod-2 Lesson 1 - Basic Dictionary Ops.csproj", "{AEE1F9FA-3D5D-4FEF-BEEC-8047A9D516A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-2 Lesson 2 - Using Concurrent Dictionary", "Mod-2 Lesson 2 - Using Concurrent Dictionary\Mod-2 Lesson 2 - Using Concurrent Dictionary.csproj", "{E2624CA1-D4EB-43DB-9ACD-64CBB13C27F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-2 Lesson 3 Concurrent Dictionary (Good practice)", "Mod-2 Lesson 3 Concurrent Dictionary (Good Practice)\Mod-2 Lesson 3 Concurrent Dictionary (Good practice).csproj", "{091DB70A-C36D-45A4-8A53-00E944B31473}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-3 T-Shirt Company", "Mod-3 T-Shirt Company\Mod-3 T-Shirt Company.csproj", "{CC70204A-278F-41B7-A400-22487982D6A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-4 Lesson 1 Generic Queue", "Mod-4 Lesson 1 Generic Queue\Mod-4 Lesson 1 Generic Queue.csproj", "{6600E939-303A-4880-860B-19F561DB8D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-4 Lesson 2 Concurrent Queue", "Mod-4 Lesson 2 Concurrent Queue\Mod-4 Lesson 2 Concurrent Queue.csproj", "{DDD035D0-85AB-4B31-A564-BA6AAD05DDBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-4 Lesson 3 Concurrent Stack", "Mod-4 Lesson 3 Concurrent Stack\Mod-4 Lesson 3 Concurrent Stack.csproj", "{70358F53-6EEB-4601-9ACD-9A23B83039AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-4 Lesson 4 Concurrent Bag", "Mod-4 Lesson 4 Concurrent Bag\Mod-4 Lesson 4 Concurrent Bag.csproj", "{8A02F1C9-F12F-4A58-8D6B-A13AC0C13F32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-4 Lesson 5 Producer Consumer", "Mod-4 Lesson 5 Producer Consumer\Mod-4 Lesson 5 Producer Consumer.csproj", "{3EBA942A-197B-4759-A82C-95707B923618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-5 Sales Bonuses", "Mod-5 Sales Bonuses\Mod-5 Sales Bonuses.csproj", "{2A738BA8-ACB1-43F7-A254-D1844C06EF11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-6 Lesson 1 Dictionary Benchmarks", "Mod-6 Lesson 1 Dictionary Benchmarks\Mod-6 Lesson 1 Dictionary Benchmarks.csproj", "{28821BB0-9B00-4B39-962D-1FDAA0F54016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mod-6 Lesson 2 - Enumerators", "Mod-6 Lesson 2 - Enumerators\Mod-6 Lesson 2 - Enumerators.csproj", "{5BF17FCF-986A-4ACB-BA34-A90AC5FB7CDD}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 15
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pratikvsb.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ConcurrentCollections\\Mod-1\u0020Lesson\u00201\u0020-\u0020Simple\u0020Queue.csproj
+		SccProjectName1 = ConcurrentCollections
+		SccLocalPath1 = ConcurrentCollections
+		SccProjectUniqueName2 = Mod-1\u0020Lesson\u00202\u0020-\u0020Multithreaded\\Mod-1\u0020Lesson\u00202\u0020-\u0020Multithreaded.csproj
+		SccProjectName2 = Mod-1\u0020Lesson\u00202\u0020-\u0020Multithreaded
+		SccLocalPath2 = Mod-1\u0020Lesson\u00202\u0020-\u0020Multithreaded
+		SccProjectUniqueName3 = Mod-2\u0020Lesson\u00201\\Mod-2\u0020Lesson\u00201\u0020-\u0020Basic\u0020Dictionary\u0020Ops.csproj
+		SccProjectName3 = Mod-2\u0020Lesson\u00201
+		SccLocalPath3 = Mod-2\u0020Lesson\u00201
+		SccProjectUniqueName4 = Mod-2\u0020Lesson\u00202\u0020-\u0020Using\u0020Concurrent\u0020Dictionary\\Mod-2\u0020Lesson\u00202\u0020-\u0020Using\u0020Concurrent\u0020Dictionary.csproj
+		SccProjectName4 = Mod-2\u0020Lesson\u00202\u0020-\u0020Using\u0020Concurrent\u0020Dictionary
+		SccLocalPath4 = Mod-2\u0020Lesson\u00202\u0020-\u0020Using\u0020Concurrent\u0020Dictionary
+		SccProjectUniqueName5 = Mod-2\u0020Lesson\u00203\u0020Concurrent\u0020Dictionary\u0020(Good\u0020Practice)\\Mod-2\u0020Lesson\u00203\u0020Concurrent\u0020Dictionary\u0020(Good\u0020practice).csproj
+		SccProjectName5 = Mod-2\u0020Lesson\u00203\u0020Concurrent\u0020Dictionary\u0020(Good\u0020Practice)
+		SccLocalPath5 = Mod-2\u0020Lesson\u00203\u0020Concurrent\u0020Dictionary\u0020(Good\u0020Practice)
+		SccProjectUniqueName6 = Mod-3\u0020T-Shirt\u0020Company\\Mod-3\u0020T-Shirt\u0020Company.csproj
+		SccProjectName6 = Mod-3\u0020T-Shirt\u0020Company
+		SccLocalPath6 = Mod-3\u0020T-Shirt\u0020Company
+		SccProjectUniqueName7 = Mod-4\u0020Lesson\u00201\u0020Generic\u0020Queue\\Mod-4\u0020Lesson\u00201\u0020Generic\u0020Queue.csproj
+		SccProjectName7 = Mod-4\u0020Lesson\u00201\u0020Generic\u0020Queue
+		SccLocalPath7 = Mod-4\u0020Lesson\u00201\u0020Generic\u0020Queue
+		SccProjectUniqueName8 = Mod-4\u0020Lesson\u00202\u0020Concurrent\u0020Queue\\Mod-4\u0020Lesson\u00202\u0020Concurrent\u0020Queue.csproj
+		SccProjectName8 = Mod-4\u0020Lesson\u00202\u0020Concurrent\u0020Queue
+		SccLocalPath8 = Mod-4\u0020Lesson\u00202\u0020Concurrent\u0020Queue
+		SccProjectUniqueName9 = Mod-4\u0020Lesson\u00203\u0020Concurrent\u0020Stack\\Mod-4\u0020Lesson\u00203\u0020Concurrent\u0020Stack.csproj
+		SccProjectName9 = Mod-4\u0020Lesson\u00203\u0020Concurrent\u0020Stack
+		SccLocalPath9 = Mod-4\u0020Lesson\u00203\u0020Concurrent\u0020Stack
+		SccProjectUniqueName10 = Mod-4\u0020Lesson\u00204\u0020Concurrent\u0020Bag\\Mod-4\u0020Lesson\u00204\u0020Concurrent\u0020Bag.csproj
+		SccProjectName10 = Mod-4\u0020Lesson\u00204\u0020Concurrent\u0020Bag
+		SccLocalPath10 = Mod-4\u0020Lesson\u00204\u0020Concurrent\u0020Bag
+		SccProjectUniqueName11 = Mod-4\u0020Lesson\u00205\u0020Producer\u0020Consumer\\Mod-4\u0020Lesson\u00205\u0020Producer\u0020Consumer.csproj
+		SccProjectName11 = Mod-4\u0020Lesson\u00205\u0020Producer\u0020Consumer
+		SccLocalPath11 = Mod-4\u0020Lesson\u00205\u0020Producer\u0020Consumer
+		SccProjectUniqueName12 = Mod-5\u0020Sales\u0020Bonuses\\Mod-5\u0020Sales\u0020Bonuses.csproj
+		SccProjectName12 = Mod-5\u0020Sales\u0020Bonuses
+		SccLocalPath12 = Mod-5\u0020Sales\u0020Bonuses
+		SccProjectUniqueName13 = Mod-6\u0020Lesson\u00201\u0020Dictionary\u0020Benchmarks\\Mod-6\u0020Lesson\u00201\u0020Dictionary\u0020Benchmarks.csproj
+		SccProjectName13 = Mod-6\u0020Lesson\u00201\u0020Dictionary\u0020Benchmarks
+		SccLocalPath13 = Mod-6\u0020Lesson\u00201\u0020Dictionary\u0020Benchmarks
+		SccProjectUniqueName14 = Mod-6\u0020Lesson\u00202\u0020-\u0020Enumerators\\Mod-6\u0020Lesson\u00202\u0020-\u0020Enumerators.csproj
+		SccProjectName14 = Mod-6\u0020Lesson\u00202\u0020-\u0020Enumerators
+		SccLocalPath14 = Mod-6\u0020Lesson\u00202\u0020-\u0020Enumerators
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF925B27-5CB3-4F43-8611-A9189916B65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF925B27-5CB3-4F43-8611-A9189916B65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF925B27-5CB3-4F43-8611-A9189916B65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF925B27-5CB3-4F43-8611-A9189916B65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9220F0BC-70C6-40B1-9723-45927CA78A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9220F0BC-70C6-40B1-9723-45927CA78A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9220F0BC-70C6-40B1-9723-45927CA78A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9220F0BC-70C6-40B1-9723-45927CA78A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE1F9FA-3D5D-4FEF-BEEC-8047A9D516A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE1F9FA-3D5D-4FEF-BEEC-8047A9D516A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE1F9FA-3D5D-4FEF-BEEC-8047A9D516A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE1F9FA-3D5D-4FEF-BEEC-8047A9D516A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2624CA1-D4EB-43DB-9ACD-64CBB13C27F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2624CA1-D4EB-43DB-9ACD-64CBB13C27F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2624CA1-D4EB-43DB-9ACD-64CBB13C27F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2624CA1-D4EB-43DB-9ACD-64CBB13C27F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091DB70A-C36D-45A4-8A53-00E944B31473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091DB70A-C36D-45A4-8A53-00E944B31473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091DB70A-C36D-45A4-8A53-00E944B31473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091DB70A-C36D-45A4-8A53-00E944B31473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC70204A-278F-41B7-A400-22487982D6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC70204A-278F-41B7-A400-22487982D6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC70204A-278F-41B7-A400-22487982D6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC70204A-278F-41B7-A400-22487982D6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6600E939-303A-4880-860B-19F561DB8D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6600E939-303A-4880-860B-19F561DB8D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6600E939-303A-4880-860B-19F561DB8D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6600E939-303A-4880-860B-19F561DB8D28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD035D0-85AB-4B31-A564-BA6AAD05DDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD035D0-85AB-4B31-A564-BA6AAD05DDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD035D0-85AB-4B31-A564-BA6AAD05DDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD035D0-85AB-4B31-A564-BA6AAD05DDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70358F53-6EEB-4601-9ACD-9A23B83039AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70358F53-6EEB-4601-9ACD-9A23B83039AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70358F53-6EEB-4601-9ACD-9A23B83039AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70358F53-6EEB-4601-9ACD-9A23B83039AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A02F1C9-F12F-4A58-8D6B-A13AC0C13F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A02F1C9-F12F-4A58-8D6B-A13AC0C13F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A02F1C9-F12F-4A58-8D6B-A13AC0C13F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A02F1C9-F12F-4A58-8D6B-A13AC0C13F32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EBA942A-197B-4759-A82C-95707B923618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EBA942A-197B-4759-A82C-95707B923618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EBA942A-197B-4759-A82C-95707B923618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EBA942A-197B-4759-A82C-95707B923618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A738BA8-ACB1-43F7-A254-D1844C06EF11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A738BA8-ACB1-43F7-A254-D1844C06EF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A738BA8-ACB1-43F7-A254-D1844C06EF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A738BA8-ACB1-43F7-A254-D1844C06EF11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28821BB0-9B00-4B39-962D-1FDAA0F54016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28821BB0-9B00-4B39-962D-1FDAA0F54016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28821BB0-9B00-4B39-962D-1FDAA0F54016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28821BB0-9B00-4B39-962D-1FDAA0F54016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF17FCF-986A-4ACB-BA34-A90AC5FB7CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF17FCF-986A-4ACB-BA34-A90AC5FB7CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF17FCF-986A-4ACB-BA34-A90AC5FB7CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF17FCF-986A-4ACB-BA34-A90AC5FB7CDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

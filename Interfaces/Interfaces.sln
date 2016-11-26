@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polygons.Library", "Polygons.Library\Polygons.Library.csproj", "{98577B11-036C-4218-96D5-D0DE3F23DE03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polygons", "Polygons\Polygons.csproj", "{739C233F-4301-46AF-B092-C8E926663E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People.Viewer", "People.Viewer\People.Viewer.csproj", "{C49C7299-E505-42B4-939B-A3A9E49D6BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "People.Library", "People.Library\People.Library.csproj", "{A8EEE0A9-3148-42F2-9713-BE27331179C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Library", "Interface.Library\Interface.Library.csproj", "{D43EB5D9-6AB8-4638-9630-3FCF1985558D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer", "Viewer\Viewer.csproj", "{473BEC17-F49B-4C06-A776-A27B077C8A08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98577B11-036C-4218-96D5-D0DE3F23DE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98577B11-036C-4218-96D5-D0DE3F23DE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98577B11-036C-4218-96D5-D0DE3F23DE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98577B11-036C-4218-96D5-D0DE3F23DE03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{739C233F-4301-46AF-B092-C8E926663E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{739C233F-4301-46AF-B092-C8E926663E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{739C233F-4301-46AF-B092-C8E926663E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{739C233F-4301-46AF-B092-C8E926663E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C49C7299-E505-42B4-939B-A3A9E49D6BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C49C7299-E505-42B4-939B-A3A9E49D6BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C49C7299-E505-42B4-939B-A3A9E49D6BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C49C7299-E505-42B4-939B-A3A9E49D6BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EEE0A9-3148-42F2-9713-BE27331179C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EEE0A9-3148-42F2-9713-BE27331179C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EEE0A9-3148-42F2-9713-BE27331179C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EEE0A9-3148-42F2-9713-BE27331179C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D43EB5D9-6AB8-4638-9630-3FCF1985558D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D43EB5D9-6AB8-4638-9630-3FCF1985558D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D43EB5D9-6AB8-4638-9630-3FCF1985558D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D43EB5D9-6AB8-4638-9630-3FCF1985558D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473BEC17-F49B-4C06-A776-A27B077C8A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473BEC17-F49B-4C06-A776-A27B077C8A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473BEC17-F49B-4C06-A776-A27B077C8A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473BEC17-F49B-4C06-A776-A27B077C8A08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pratikvsb.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Polygons.Library\\Polygons.Library.csproj
+		SccProjectName1 = Polygons.Library
+		SccLocalPath1 = Polygons.Library
+		SccProjectUniqueName2 = Polygons\\Polygons.csproj
+		SccProjectName2 = Polygons
+		SccLocalPath2 = Polygons
+		SccProjectUniqueName3 = People.Viewer\\People.Viewer.csproj
+		SccProjectName3 = People.Viewer
+		SccLocalPath3 = People.Viewer
+		SccProjectUniqueName4 = People.Library\\People.Library.csproj
+		SccProjectName4 = People.Library
+		SccLocalPath4 = People.Library
+		SccProjectUniqueName5 = Interface.Library\\Interface.Library.csproj
+		SccProjectName5 = Interface.Library
+		SccLocalPath5 = Interface.Library
+		SccProjectUniqueName6 = Viewer\\Viewer.csproj
+		SccProjectName6 = Viewer
+		SccLocalPath6 = Viewer
+	EndGlobalSection
+EndGlobal
