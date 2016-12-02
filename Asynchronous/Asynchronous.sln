@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssFeedAsync", "RssFeedAsync\RssFeedAsync.csproj", "{6AA7B40F-765D-4F07-B556-CA9963A9C7B4}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginAsyncNew", "LoginAsyncNew\LoginAsyncNew.csproj", "{F5DA69CA-3766-4D78-B4CC-A4CCA94A9279}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAsync", "WebAsync\WebAsync.csproj", "{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocVarAsync", "LocVarAsync\LocVarAsync.csproj", "{60160D35-BCE9-40B1-9F8D-C07A3A93256D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,29 +43,12 @@ Global
 		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BB11D1B-68F7-4E26-9D8A-E2F269120BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60160D35-BCE9-40B1-9F8D-C07A3A93256D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60160D35-BCE9-40B1-9F8D-C07A3A93256D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60160D35-BCE9-40B1-9F8D-C07A3A93256D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60160D35-BCE9-40B1-9F8D-C07A3A93256D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://pratikvsb.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = RssFeedAsync\\RssFeedAsync.csproj
-		SccProjectName1 = RssFeedAsync
-		SccLocalPath1 = RssFeedAsync
-		SccProjectUniqueName2 = RssFeedAndroid\\RssFeedAndroid.csproj
-		SccProjectName2 = RssFeedAndroid
-		SccLocalPath2 = RssFeedAndroid
-		SccProjectUniqueName3 = LoginAsync\\LoginAsync.csproj
-		SccProjectName3 = LoginAsync
-		SccLocalPath3 = LoginAsync
-		SccProjectUniqueName4 = LoginAsyncNew\\LoginAsyncNew.csproj
-		SccProjectName4 = LoginAsyncNew
-		SccLocalPath4 = LoginAsyncNew
-		SccProjectUniqueName5 = WebAsync\\WebAsync.csproj
-		SccProjectName5 = WebAsync
-		SccLocalPath5 = WebAsync
 	EndGlobalSection
 EndGlobal
