@@ -19,6 +19,8 @@ namespace ODataSample.Services
                 return "ShortDescription";
             if (productPropertyName == "Name" && (propertyParentName == "Language" || propertyParentName == "Lang"))
                 return "DescriptionLanguageName";
+            if (productPropertyName == "Name" && (propertyParentName == "Reference" || propertyParentName == "References"))
+                return "DetailReferenceNames";
 
             return "";
         }

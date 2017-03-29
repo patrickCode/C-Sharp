@@ -489,6 +489,16 @@ namespace ODataSample.Tests
             var actualConvertedExpression = _odataConverter.Convert(originalExpression);
             Assert.AreEqual(expectedExpression, actualConvertedExpression);
         }
+
+        [TestMethod]
+        public void SingleAnyExpression_WithNestedProperties()
+        {
+            const string originalExpression = "Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "DetailReferenceNames/any(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
         #endregion
     }
 }
