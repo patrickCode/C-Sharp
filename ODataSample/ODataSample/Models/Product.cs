@@ -15,6 +15,8 @@ namespace ODataSample.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public Details Details { get; set; }
+        public List<string> Tags { get; set; }
+        public List<OrderLine> OrderLines { get; set; }
 
         public static IEdmModel GetEdmModel()
         {
@@ -24,15 +26,27 @@ namespace ODataSample.Models
         }
     }
 
+    public class OrderLine
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
     public class Details
     {
         public string Description { get; set; }
         public Language Lang { get; set; }
+        public List<Reference> References { get; set; }
     }
 
     public class Language
     {
         public string Code { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class Reference
+    {
         public string Name { get; set; }
     }
 }

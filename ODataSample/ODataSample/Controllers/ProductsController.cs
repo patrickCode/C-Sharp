@@ -35,7 +35,8 @@ namespace ODataSample.Controllers
             //Validate the OData setting on the actual object
             var settings = new ODataValidationSettings()
             {
-                AllowedLogicalOperators = AllowedLogicalOperators.Equal | AllowedLogicalOperators.And | AllowedLogicalOperators.Or
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal | AllowedLogicalOperators.And | AllowedLogicalOperators.Or,
+                AllowedFunctions = AllowedFunctions.Any | AllowedFunctions.All
             };
             options.Validate(settings);
 

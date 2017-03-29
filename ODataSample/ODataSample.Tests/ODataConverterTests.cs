@@ -478,5 +478,17 @@ namespace ODataSample.Tests
         }
         #endregion
         #endregion
+
+        #region Multi-Valued
+        [TestMethod]
+        public void SingleAnyExpression()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy')";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
     }
 }

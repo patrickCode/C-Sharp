@@ -11,6 +11,8 @@ namespace ODataSample.Services
                 return "ProductId";
             if (productPropertyName == "Name" && string.IsNullOrEmpty(propertyParentName))
                 return "Name";
+            if (productPropertyName == "Tags" && string.IsNullOrEmpty(propertyParentName))
+                return "ProductTags";
             if (productPropertyName == "Description" && propertyParentName == "Details")
                 return "DetailsDescription";
             if (productPropertyName == "Description" && string.IsNullOrEmpty(propertyParentName))

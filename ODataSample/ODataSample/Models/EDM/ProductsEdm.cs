@@ -1,11 +1,5 @@
 ﻿using Microsoft.Data.Edm;
-using Microsoft.Data.Edm.Library;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Dispatcher;
 using System.Web.Http.OData.Builder;
 
 namespace ODataSample.Models.EDM
@@ -18,6 +12,7 @@ namespace ODataSample.Models.EDM
         public string DetailsDescription { get; set; }
         public string DescriptionLanguageCode { get; set; }
         public string DescriptionLanguageName { get; set; }
+        public List<string> ProductTags { get; set; }
 
         public static IEdmModel GetProductsModel()
         {   

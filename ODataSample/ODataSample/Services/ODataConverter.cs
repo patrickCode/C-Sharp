@@ -8,7 +8,7 @@ using Microsoft.Data.OData.Query.SemanticAst;
 
 namespace ODataSample.Services
 {
-    public class ODataConverter: IODataExpressionConverter
+    public class ODataConverter : IODataExpressionConverter
     {
         private IEdmModel _sourceModel;
         private Type _sourceType;
@@ -39,17 +39,38 @@ namespace ODataSample.Services
 
         public string Convert(string originalExpression)
         {
-            var filterOption = new FilterQueryOption(originalExpression, 
+            var filterOption = new FilterQueryOption(originalExpression,
                 new ODataQueryContext(_sourceModel, _sourceType));
 
             var converterFilterOption = Convert(filterOption);
             return converterFilterOption.RawValue;
         }
 
+        private string ResolveAnyNode(AnyNode node)
+        {
+            BinaryOperatorNode expression = node.Body as BinaryOperatorNode;
+            var leftNode = expression.Left as NonentityRangeVariableReferenceNode;
+            var rightExpression = (expression.Right as ConstantNode).LiteralText;
+
+            var propertyName = (node.Source as CollectionPropertyAccessNode).Property.Name;
+            var mappedPropertyName = _fieldMapper.Map(propertyName, string.Empty);
+
+            var alias = leftNode.Name;
+
+            var expressionFormat = $"{mappedPropertyName}/any({alias}: {alias} eq {rightExpression})";
+            return expressionFormat;
+        }
+        
         private string Resolve(SingleValueNode node)
         {
             BinaryOperatorNode expression;
-            if (node is ConvertNode)
+
+            if (node is AnyNode)
+            {
+                return ResolveAnyNode(node as AnyNode);
+                //expression = (node as AnyNode).Body as BinaryOperatorNode;
+            }
+            else if (node is ConvertNode)
             {
                 var convertNode = node as ConvertNode;
                 expression = (convertNode.Source) as BinaryOperatorNode;
@@ -58,29 +79,10 @@ namespace ODataSample.Services
             {
                 expression = node as BinaryOperatorNode;
             }
+
             if (IsLeafNode(expression))
             {
-                var leftNode = expression.Left as SingleValuePropertyAccessNode;
-                var rightNode = expression.Right as ConstantNode;
-
-                string sourceName = string.Empty;
-                if (leftNode.Source is SingleNavigationNode)
-                {
-                    sourceName = ((dynamic)(leftNode.Source as SingleNavigationNode).EntityTypeReference.Definition).Name;
-                }
-
-                if (leftNode.Source is SingleValuePropertyAccessNode)
-                {
-                    sourceName = (leftNode.Source as SingleValuePropertyAccessNode).Property.Name;
-                }
-
-                var docName = _fieldMapper.Map(leftNode.Property.Name, sourceName);
-                var val = rightNode.LiteralText;
-                var op = expression.OperatorKind;
-
-                var rawFilterExpression = $"{docName} {GetODataOperator(op)} {val}";
-
-                return rawFilterExpression;
+                return FormExpressionForBinaryNode(expression);
             }
             var leftExpression = Resolve(expression.Left);
             var rightExpression = Resolve(expression.Right);
@@ -92,6 +94,35 @@ namespace ODataSample.Services
                 rightExpression = $"({rightExpression})";
 
             return $"{leftExpression} {GetODataOperator(expression.OperatorKind)} {rightExpression}";
+        }
+
+        //private string FormExpressionForAnyNode(AnyNode node)
+        //{
+
+        //} 
+
+        private string FormExpressionForBinaryNode(BinaryOperatorNode expression)
+        {
+            var leftNode = expression.Left as SingleValuePropertyAccessNode;
+            var rightNode = expression.Right as ConstantNode;
+
+            string sourceName = string.Empty;
+            if (leftNode.Source is SingleNavigationNode)
+            {
+                sourceName = ((dynamic)(leftNode.Source as SingleNavigationNode).EntityTypeReference.Definition).Name;
+            }
+            if (leftNode.Source is SingleValuePropertyAccessNode)
+            {
+                sourceName = (leftNode.Source as SingleValuePropertyAccessNode).Property.Name;
+            }
+
+            var docName = _fieldMapper.Map(leftNode.Property.Name, sourceName);
+            var val = rightNode.LiteralText;
+            var op = expression.OperatorKind;
+
+            var rawFilterExpression = $"{docName} {GetODataOperator(op)} {val}";
+
+            return rawFilterExpression;
         }
 
         private bool IsLeafNode(SingleValueNode node)
