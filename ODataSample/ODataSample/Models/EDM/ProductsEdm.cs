@@ -14,6 +14,7 @@ namespace ODataSample.Models.EDM
         public string DescriptionLanguageName { get; set; }
         public List<string> ProductTags { get; set; }
         public List<string> DetailReferenceNames { get; set; }
+        public List<string> OrderLines { get; set; }
 
         public static IEdmModel GetProductsModel()
         {   

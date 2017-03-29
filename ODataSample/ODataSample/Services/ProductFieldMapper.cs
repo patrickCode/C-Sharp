@@ -7,7 +7,7 @@ namespace ODataSample.Services
         public string Map(string productPropertyName, string propertyParentName)
         {
             //TODO - Remove property naming and use OData references
-            if (productPropertyName == "Id") //Bad Practice - Not considering the name
+            if (productPropertyName == "Id") //Bad Practice - Not considering the parent name
                 return "ProductId";
             if (productPropertyName == "Name" && string.IsNullOrEmpty(propertyParentName))
                 return "Name";
@@ -21,6 +21,8 @@ namespace ODataSample.Services
                 return "DescriptionLanguageName";
             if (productPropertyName == "Name" && (propertyParentName == "Reference" || propertyParentName == "References"))
                 return "DetailReferenceNames";
+            if (productPropertyName == "Name" && (propertyParentName == "OrderLine" || propertyParentName == "OrderLines"))
+                return "OrderLines";
 
             return "";
         }

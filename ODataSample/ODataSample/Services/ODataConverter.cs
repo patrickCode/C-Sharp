@@ -100,19 +100,7 @@ namespace ODataSample.Services
                 }
 
             }
-
-
-            //else if (node.Source is CollectionNavigationNode)
-            //{
-            //    var sourceNode = node.Source as CollectionNavigationNode;
-            //    parentPropertyName = ((dynamic)(sourceNode.ItemType.Definition)).Name;
-            //    if (sourceNode.Source is SingleNavigationNode)
-            //    {
-            //        var rootNode = sourceNode.Source as SingleNavigationNode;
-            //        rootPropertyName = ((dynamic)(rootNode.EntityTypeReference.Definition)).Name;
-            //    }
-            //}
-
+         
             var rightExpression = (expression.Right as ConstantNode).LiteralText;
             
             var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName);
@@ -146,19 +134,14 @@ namespace ODataSample.Services
             var leftExpression = Resolve(expression.Left);
             var rightExpression = Resolve(expression.Right);
 
-            if (!IsLeafNode(expression.Left))
+            if (!IsLeafNode(expression.Left) && !(expression.Left is AnyNode))
                 leftExpression = $"({leftExpression})";
 
-            if (!IsLeafNode(expression.Right))
+            if (!IsLeafNode(expression.Right) && !(expression.Right is AnyNode))
                 rightExpression = $"({rightExpression})";
 
             return $"{leftExpression} {GetODataOperator(expression.OperatorKind)} {rightExpression}";
         }
-
-        //private string FormExpressionForAnyNode(AnyNode node)
-        //{
-
-        //} 
 
         private string FormExpressionForBinaryNode(BinaryOperatorNode expression)
         {
