@@ -52,7 +52,7 @@ namespace ODataSample.Services
             return converterFilterOption.RawValue;
         }
 
-        private string ResolveAllNode(AllNode node)
+        private string ResolveLamdaNode(LambdaNode node)
         {
             BinaryOperatorNode expression = node.Body as BinaryOperatorNode;
             string alias = "";
@@ -110,69 +110,8 @@ namespace ODataSample.Services
             var rightExpression = (expression.Right as ConstantNode).LiteralText;
 
             var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName);
-            var expressionFormat = $"{mappedPropertyName}/all({alias}: {alias} eq {rightExpression})";
-            return expressionFormat;
-        }
-
-        private string ResolveAnyNode(AnyNode node)
-        {
-            BinaryOperatorNode expression = node.Body as BinaryOperatorNode;
-            string alias = "";
-            string propertyName = "";
-            string parentPropertyName = "";
-            string rootPropertyName = "";
-
-            //Property at root
-            if (expression.Left is NonentityRangeVariableReferenceNode)
-            {
-                var leftNode = expression.Left as NonentityRangeVariableReferenceNode;
-                alias = leftNode.Name;
-
-                if (node.Source is CollectionPropertyAccessNode)
-                {
-                    propertyName = (node.Source as CollectionPropertyAccessNode).Property.Name;
-                }
-            }
-            else if (expression.Left is SingleValuePropertyAccessNode)
-            {
-                var leftNode = expression.Left as SingleValuePropertyAccessNode;
-                if (leftNode.Source is NonentityRangeVariableReferenceNode)
-                {
-                    alias = (leftNode.Source as NonentityRangeVariableReferenceNode).Name;
-                }
-                else if (leftNode.Source is EntityRangeVariableReferenceNode)
-                {
-                    alias = (leftNode.Source as EntityRangeVariableReferenceNode).Name;
-                }
-                propertyName = leftNode.Property.Name;
-
-                if (node.Source is CollectionPropertyAccessNode)
-                {
-                    parentPropertyName = (node.Source as CollectionPropertyAccessNode).Property.Name;
-                    var sourceNode = node.Source as CollectionPropertyAccessNode;
-                    if (sourceNode.Source is SingleValuePropertyAccessNode)
-                    {
-                        var rootNode = sourceNode.Source as SingleValuePropertyAccessNode;
-                        rootPropertyName = rootNode.Property.Name;
-                    }
-                }
-                else if (node.Source is CollectionNavigationNode)
-                {
-                    var sourceNode = node.Source as CollectionNavigationNode;
-                    parentPropertyName = ((dynamic)(sourceNode.ItemType.Definition)).Name;
-                    if (sourceNode.Source is SingleNavigationNode)
-                    {
-                        var rootNode = sourceNode.Source as SingleNavigationNode;
-                        rootPropertyName = ((dynamic)(rootNode.EntityTypeReference.Definition)).Name;
-                    }
-                }
-
-            }
-         
-            var rightExpression = (expression.Right as ConstantNode).LiteralText;
-            
-            var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName);
-            var expressionFormat = $"{mappedPropertyName}/any({alias}: {alias} eq {rightExpression})";
+            var lamdaProperty = node.Kind == QueryNodeKind.Any ? "any" : "all";
+            var expressionFormat = $"{mappedPropertyName}/{lamdaProperty}({alias}: {alias} eq {rightExpression})";
             return expressionFormat;
         }
         
@@ -180,13 +119,9 @@ namespace ODataSample.Services
         {
             BinaryOperatorNode expression;
 
-            if (node is AnyNode)
+            if (node is LambdaNode)
             {
-                return ResolveAnyNode(node as AnyNode);
-            }
-            else if (node is AllNode)
-            {
-                return ResolveAllNode(node as AllNode);
+                return ResolveLamdaNode(node as LambdaNode);
             }
             else if (node is ConvertNode)
             {
@@ -200,7 +135,7 @@ namespace ODataSample.Services
 
             if (IsLeafNode(expression))
             {
-                return FormExpressionForBinaryNode(expression);
+                return CreateExpressionForBinaryNode(expression);
             }
             var leftExpression = Resolve(expression.Left);
             var rightExpression = Resolve(expression.Right);
@@ -214,7 +149,7 @@ namespace ODataSample.Services
             return $"{leftExpression} {GetODataOperator(expression.OperatorKind)} {rightExpression}";
         }
 
-        private string FormExpressionForBinaryNode(BinaryOperatorNode expression)
+        private string CreateExpressionForBinaryNode(BinaryOperatorNode expression)
         {
             var leftNode = expression.Left as SingleValuePropertyAccessNode;
             var rightNode = expression.Right as ConstantNode;
