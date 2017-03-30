@@ -34,6 +34,12 @@ namespace ODataSample.Services
             var rawConverterExpression = Resolve(originalExpression.FilterClause.Expression);
             var convertedFilterOption = new FilterQueryOption(rawConverterExpression,
                 new ODataQueryContext(_targetModel, _targetType));
+            var settings = new ODataValidationSettings()
+            {
+                AllowedLogicalOperators = AllowedLogicalOperators.Equal | AllowedLogicalOperators.And | AllowedLogicalOperators.Or,
+                AllowedFunctions = AllowedFunctions.Any | AllowedFunctions.All
+            };
+            convertedFilterOption.Validate(settings);
             return convertedFilterOption;
         }
 
@@ -44,6 +50,68 @@ namespace ODataSample.Services
 
             var converterFilterOption = Convert(filterOption);
             return converterFilterOption.RawValue;
+        }
+
+        private string ResolveAllNode(AllNode node)
+        {
+            BinaryOperatorNode expression = node.Body as BinaryOperatorNode;
+            string alias = "";
+            string propertyName = "";
+            string parentPropertyName = "";
+            string rootPropertyName = "";
+
+            //Property at root
+            if (expression.Left is NonentityRangeVariableReferenceNode)
+            {
+                var leftNode = expression.Left as NonentityRangeVariableReferenceNode;
+                alias = leftNode.Name;
+
+                if (node.Source is CollectionPropertyAccessNode)
+                {
+                    propertyName = (node.Source as CollectionPropertyAccessNode).Property.Name;
+                }
+            }
+            else if (expression.Left is SingleValuePropertyAccessNode)
+            {
+                var leftNode = expression.Left as SingleValuePropertyAccessNode;
+                if (leftNode.Source is NonentityRangeVariableReferenceNode)
+                {
+                    alias = (leftNode.Source as NonentityRangeVariableReferenceNode).Name;
+                }
+                else if (leftNode.Source is EntityRangeVariableReferenceNode)
+                {
+                    alias = (leftNode.Source as EntityRangeVariableReferenceNode).Name;
+                }
+                propertyName = leftNode.Property.Name;
+
+                if (node.Source is CollectionPropertyAccessNode)
+                {
+                    parentPropertyName = (node.Source as CollectionPropertyAccessNode).Property.Name;
+                    var sourceNode = node.Source as CollectionPropertyAccessNode;
+                    if (sourceNode.Source is SingleValuePropertyAccessNode)
+                    {
+                        var rootNode = sourceNode.Source as SingleValuePropertyAccessNode;
+                        rootPropertyName = rootNode.Property.Name;
+                    }
+                }
+                else if (node.Source is CollectionNavigationNode)
+                {
+                    var sourceNode = node.Source as CollectionNavigationNode;
+                    parentPropertyName = ((dynamic)(sourceNode.ItemType.Definition)).Name;
+                    if (sourceNode.Source is SingleNavigationNode)
+                    {
+                        var rootNode = sourceNode.Source as SingleNavigationNode;
+                        rootPropertyName = ((dynamic)(rootNode.EntityTypeReference.Definition)).Name;
+                    }
+                }
+
+            }
+
+            var rightExpression = (expression.Right as ConstantNode).LiteralText;
+
+            var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName);
+            var expressionFormat = $"{mappedPropertyName}/all({alias}: {alias} eq {rightExpression})";
+            return expressionFormat;
         }
 
         private string ResolveAnyNode(AnyNode node)
@@ -115,7 +183,10 @@ namespace ODataSample.Services
             if (node is AnyNode)
             {
                 return ResolveAnyNode(node as AnyNode);
-                //expression = (node as AnyNode).Body as BinaryOperatorNode;
+            }
+            else if (node is AllNode)
+            {
+                return ResolveAllNode(node as AllNode);
             }
             else if (node is ConvertNode)
             {
@@ -134,10 +205,10 @@ namespace ODataSample.Services
             var leftExpression = Resolve(expression.Left);
             var rightExpression = Resolve(expression.Right);
 
-            if (!IsLeafNode(expression.Left) && !(expression.Left is AnyNode))
+            if (!(IsLeafNode(expression.Left) || IsAnyAllNode(expression.Left)))
                 leftExpression = $"({leftExpression})";
 
-            if (!IsLeafNode(expression.Right) && !(expression.Right is AnyNode))
+            if (!(IsLeafNode(expression.Right) || IsAnyAllNode(expression.Right)))
                 rightExpression = $"({rightExpression})";
 
             return $"{leftExpression} {GetODataOperator(expression.OperatorKind)} {rightExpression}";
@@ -165,6 +236,11 @@ namespace ODataSample.Services
             var rawFilterExpression = $"{docName} {GetODataOperator(op)} {val}";
 
             return rawFilterExpression;
+        }
+
+        private bool IsAnyAllNode(SingleValueNode node)
+        {
+            return ((node is AnyNode) || (node is AllNode));
         }
 
         private bool IsLeafNode(SingleValueNode node)

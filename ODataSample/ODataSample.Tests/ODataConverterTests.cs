@@ -4,6 +4,8 @@ using ODataSample.Interfaces;
 using ODataSample.Services;
 using ODataSample.Models;
 using ODataSample.Models.EDM;
+using Microsoft.Data.OData;
+using ODataSample.Interfaces.Fakes;
 
 namespace ODataSample.Tests
 {
@@ -480,6 +482,8 @@ namespace ODataSample.Tests
         #endregion
 
         #region Multi-Valued
+        #region Any
+        #region Single Expression
         [TestMethod]
         public void SingleAnyExpression()
         {
@@ -491,13 +495,427 @@ namespace ODataSample.Tests
         }
 
         [TestMethod]
-        public void SingleAnyExpression_WithNestedProperties()
+        public void SingleAnyExpression_WithSingleNestedProperties()
+        {
+            const string originalExpression = "OrderLines/any(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "OrderLines/any(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void SingleAnyExpression_WithDoubleNestedProperties()
         {
             const string originalExpression = "Details/References/any(r: r/Name eq 'Dummy')";
             const string expectedExpression = "DetailReferenceNames/any(r: r eq 'Dummy')";
 
             var actualConvertedExpression = _odataConverter.Convert(originalExpression);
             Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+
+        #region Multiple Expression
+        [TestMethod]
+        public void DoubleAnyExpression_WithAnd()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') and OrderLines/any(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy') and OrderLines/any(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void DoubleAnyExpression_WithAnd_ShouldParanthesis()
+        {
+            const string originalExpression = "(Tags/any(t: t eq 'Dummy') and OrderLines/any(o: o/Name eq 'Dummy'))";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy') and OrderLines/any(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void DoubleAnyExpression_WithOr()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') or OrderLines/any(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy') or OrderLines/any(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithAnd()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') and OrderLines/any(o: o/Name eq 'Dummy') and Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "(ProductTags/any(t: t eq 'Dummy') and OrderLines/any(o: o eq 'Dummy')) and DetailReferenceNames/any(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithOr()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') or OrderLines/any(o: o/Name eq 'Dummy') or Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "(ProductTags/any(t: t eq 'Dummy') or OrderLines/any(o: o eq 'Dummy')) or DetailReferenceNames/any(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithAnd_WithOr()
+        {
+            const string originalExpression = 
+                "Tags/any(t: t eq 'Dummy') and OrderLines/any(o: o/Name eq 'Dummy') or Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression = 
+                "(ProductTags/any(t: t eq 'Dummy') and OrderLines/any(o: o eq 'Dummy')) or DetailReferenceNames/any(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithAnd_WithOr_HigherPreferenceWithOr()
+        {
+            const string originalExpression =
+                "Tags/any(t: t eq 'Dummy') and (OrderLines/any(o: o/Name eq 'Dummy') or Details/References/any(r: r/Name eq 'Dummy'))";
+            const string expectedExpression =
+                "ProductTags/any(t: t eq 'Dummy') and (OrderLines/any(o: o eq 'Dummy') or DetailReferenceNames/any(r: r eq 'Dummy'))";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithOr_WithAnd()
+        {
+            const string originalExpression =
+                "Tags/any(t: t eq 'Dummy') or OrderLines/any(o: o/Name eq 'Dummy') and Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression =
+                "ProductTags/any(t: t eq 'Dummy') or (OrderLines/any(o: o eq 'Dummy') and DetailReferenceNames/any(r: r eq 'Dummy'))";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAnyExpression_WithOr_WithAnd_HigherPreferenceWithOr()
+        {
+            const string originalExpression =
+                "(Tags/any(t: t eq 'Dummy') or OrderLines/any(o: o/Name eq 'Dummy')) and Details/References/any(r: r/Name eq 'Dummy')";
+            const string expectedExpression =
+                "(ProductTags/any(t: t eq 'Dummy') or OrderLines/any(o: o eq 'Dummy')) and DetailReferenceNames/any(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+        #endregion
+
+        #region All
+        #region Single Expression
+        [TestMethod]
+        public void SingleAllExpression()
+        {
+            const string originalExpression = "Tags/all(t: t eq 'Dummy')";
+            const string expectedExpression = "ProductTags/all(t: t eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void SingleAllExpression_WithSingleNestedProperties()
+        {
+            const string originalExpression = "OrderLines/all(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "OrderLines/all(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void SingleAllExpression_WithDoubleNestedProperties()
+        {
+            const string originalExpression = "Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "DetailReferenceNames/all(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+
+        #region Multiple Expression
+        [TestMethod]
+        public void DoubleAllExpression_WithAnd()
+        {
+            const string originalExpression = "Tags/all(t: t eq 'Dummy') and OrderLines/all(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "ProductTags/all(t: t eq 'Dummy') and OrderLines/all(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void DoubleAllExpression_WithAnd_ShouldParanthesis()
+        {
+            const string originalExpression = "(Tags/all(t: t eq 'Dummy') and OrderLines/all(o: o/Name eq 'Dummy'))";
+            const string expectedExpression = "ProductTags/all(t: t eq 'Dummy') and OrderLines/all(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void DoubleAllExpression_WithOr()
+        {
+            const string originalExpression = "Tags/all(t: t eq 'Dummy') or OrderLines/all(o: o/Name eq 'Dummy')";
+            const string expectedExpression = "ProductTags/all(t: t eq 'Dummy') or OrderLines/all(o: o eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithAnd()
+        {
+            const string originalExpression = "Tags/all(t: t eq 'Dummy') and OrderLines/all(o: o/Name eq 'Dummy') and Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "(ProductTags/all(t: t eq 'Dummy') and OrderLines/all(o: o eq 'Dummy')) and DetailReferenceNames/all(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithOr()
+        {
+            const string originalExpression = "Tags/all(t: t eq 'Dummy') or OrderLines/all(o: o/Name eq 'Dummy') or Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression = "(ProductTags/all(t: t eq 'Dummy') or OrderLines/all(o: o eq 'Dummy')) or DetailReferenceNames/all(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithAnd_WithOr()
+        {
+            const string originalExpression =
+                "Tags/all(t: t eq 'Dummy') and OrderLines/all(o: o/Name eq 'Dummy') or Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression =
+                "(ProductTags/all(t: t eq 'Dummy') and OrderLines/all(o: o eq 'Dummy')) or DetailReferenceNames/all(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithAnd_WithOr_HigherPreferenceWithOr()
+        {
+            const string originalExpression =
+                "Tags/all(t: t eq 'Dummy') and (OrderLines/all(o: o/Name eq 'Dummy') or Details/References/all(r: r/Name eq 'Dummy'))";
+            const string expectedExpression =
+                "ProductTags/all(t: t eq 'Dummy') and (OrderLines/all(o: o eq 'Dummy') or DetailReferenceNames/all(r: r eq 'Dummy'))";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithOr_WithAnd()
+        {
+            const string originalExpression =
+                "Tags/all(t: t eq 'Dummy') or OrderLines/all(o: o/Name eq 'Dummy') and Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression =
+                "ProductTags/all(t: t eq 'Dummy') or (OrderLines/all(o: o eq 'Dummy') and DetailReferenceNames/all(r: r eq 'Dummy'))";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void TripleAllExpression_WithOr_WithAnd_HigherPreferenceWithOr()
+        {
+            const string originalExpression =
+                "(Tags/all(t: t eq 'Dummy') or OrderLines/all(o: o/Name eq 'Dummy')) and Details/References/all(r: r/Name eq 'Dummy')";
+            const string expectedExpression =
+                "(ProductTags/all(t: t eq 'Dummy') or OrderLines/all(o: o eq 'Dummy')) and DetailReferenceNames/all(r: r eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+        #endregion
+        #endregion
+
+        #region Multiple Paranthesis
+        [TestMethod]
+        public void ConvertPentaExpressions_With2Paranthesis()
+        {
+            const string originalExpression =
+                "(Id eq 456 or Tags/any(t: t eq 'Dummy')) and (Details/Description eq 'Desc' or OrderLines/all(o: o/Name eq 'order')) and Name eq 'Dummy'";
+            const string expectedExpression =
+                "((ProductId eq 456 or ProductTags/any(t: t eq 'Dummy')) and (DetailsDescription eq 'Desc' or OrderLines/all(o: o eq 'order'))) and Name eq 'Dummy'";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertPentaExpressions_With3Paranthesis_Nested()
+        {
+            const string originalExpression =
+                "(Id eq 456 or Tags/any(t: t eq 'Dummy')) and ((Details/Description eq 'Desc' or OrderLines/all(o: o/Name eq 'order')) or Name eq 'Dummy')";
+            const string expectedExpression =
+                "(ProductId eq 456 or ProductTags/any(t: t eq 'Dummy')) and ((DetailsDescription eq 'Desc' or OrderLines/all(o: o eq 'order')) or Name eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+
+        #region Mixed Expressions
+        [TestMethod]
+        public void ConvertDoubleMixedExpression_WithAny_WithAnd()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') and Name eq 'Test_Name'";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy') and Name eq 'Test_Name'";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertDoubleMixedExpression_WithAny_WithAll()
+        {
+            const string originalExpression = "Tags/any(t: t eq 'Dummy') and OrderLines/all(o:o/Name eq 'order')";
+            const string expectedExpression = "ProductTags/any(t: t eq 'Dummy') and OrderLines/all(o: o eq 'order')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertDoubleMixedExpression_WithAnd_WithAny()
+        {
+            const string originalExpression = "Id eq 456 and Tags/any(t: t eq 'Dummy')";
+            const string expectedExpression = "ProductId eq 456 and ProductTags/any(t: t eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertTripleMixedExpression_WithAnd_WithAny()
+        {
+            const string originalExpression = "Id eq 456 and Details/Description eq 'Desc' and Tags/any(t: t eq 'Dummy')";
+            const string expectedExpression = "(ProductId eq 456 and DetailsDescription eq 'Desc') and ProductTags/any(t: t eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertTripleMixedExpression_WithAnd_WithAny_WithAll()
+        {
+            const string originalExpression = "Id eq 456 and Tags/any(t: t eq 'Dummy') and OrderLines/all(o: o/Name eq 'order')";
+            const string expectedExpression = "(ProductId eq 456 and ProductTags/any(t: t eq 'Dummy')) and OrderLines/all(o: o eq 'order')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertTripleMixedExpression_WithAnd_WithAny_ParanthesisAtLast()
+        {
+            const string originalExpression = "Id eq 456 and (Details/Description eq 'Desc' and Tags/any(t: t eq 'Dummy'))";
+            const string expectedExpression = "ProductId eq 456 and (DetailsDescription eq 'Desc' and ProductTags/any(t: t eq 'Dummy'))";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertTripleMixedExpression_WithAnd_WithAny_AnyInMiddle()
+        {
+            const string originalExpression = "Id eq 456 and Tags/any(t: t eq 'Dummy') and Details/Description eq 'Desc'";
+            const string expectedExpression = "(ProductId eq 456 and ProductTags/any(t: t eq 'Dummy')) and DetailsDescription eq 'Desc'";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertPentaMixedExpression()
+        {
+            const string originalExpression = 
+                "Id eq 456 and Tags/any(t: t eq 'Dummy') and Details/Description eq 'Desc' or OrderLines/all(o: o/Name eq 'order') and Name eq 'Dummy'";
+            const string expectedExpression = 
+                "((ProductId eq 456 and ProductTags/any(t: t eq 'Dummy')) and DetailsDescription eq 'Desc') or (OrderLines/all(o: o eq 'order') and Name eq 'Dummy')";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+
+        [TestMethod]
+        public void ConvertPentaMixedExpression_WithParanthesis()
+        {
+            const string originalExpression =
+                "Id eq 456 and Tags/any(t: t eq 'Dummy') and (Details/Description eq 'Desc' or OrderLines/all(o: o/Name eq 'order')) and Name eq 'Dummy'";
+            const string expectedExpression =
+                "((ProductId eq 456 and ProductTags/any(t: t eq 'Dummy')) and (DetailsDescription eq 'Desc' or OrderLines/all(o: o eq 'order'))) and Name eq 'Dummy'";
+
+            var actualConvertedExpression = _odataConverter.Convert(originalExpression);
+            Assert.AreEqual(expectedExpression, actualConvertedExpression);
+        }
+        #endregion
+
+        #region Negative Tests
+        [ExpectedException(typeof(ODataException))]
+        [TestMethod]
+        public void ShouldExpectException_WhenOriginalExpressionHasWrongFieldName()
+        {
+            const string originalExpression = 
+                "ProductId eq 456 and Tags/any(t: t eq 'Dummy') and Details/Description eq 'Desc'";
+            _odataConverter.Convert(originalExpression);
+        }
+
+        [ExpectedException(typeof(ODataException))]
+        [TestMethod]
+        public void ShouldExpectException_WhenOriginalExpressionHasWrongFieldNames()
+        {
+            const string originalExpression =
+                "Id eq 456 and ProductTags/any(t: t eq 'Dummy') and (Details/Description eq 'Desc' or OrderLine/all(o: o/Name eq 'order')) and Name eq 'Dummy'";
+            _odataConverter.Convert(originalExpression);
+        }
+
+        [ExpectedException(typeof(ODataException))]
+        [TestMethod]
+        public void ShouldExpectException_WhenConvertedExpressionHasWrongFieldName()
+        {
+            const string originalExpression =
+                "Id eq 456 and Tags/any(t: t eq 'Dummy') and Details/Description eq 'Desc'";
+
+            var fakeFieldMapper = new StubIFieldMapper()
+            {
+                MapStringString = (productPropertyName, propertyParentName) =>
+                {
+                    if (productPropertyName == "Id")
+                        return "Id";
+                    if (productPropertyName == "Tags" && string.IsNullOrEmpty(propertyParentName))
+                        return "Tags";
+                    if (productPropertyName == "Description" && propertyParentName == "Details")
+                        return "DetailsDescription";
+                    return "";
+                }
+            };
+            var productEdmModel = Product.GetEdmModel();
+            var productDocsEdmModel = ProductDocEdm.GetProductsModel();
+            _odataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDocEdm), fakeFieldMapper);
+            var convertedExpression = _odataConverter.Convert(originalExpression);
         }
         #endregion
     }
