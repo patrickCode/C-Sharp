@@ -97,11 +97,11 @@ namespace ODataSample.Services
                 else if (node.Source is CollectionNavigationNode)
                 {
                     var sourceNode = node.Source as CollectionNavigationNode;
-                    parentPropertyName = ((dynamic)(sourceNode.ItemType.Definition)).Name;
+                    parentPropertyName = sourceNode.NavigationProperty.Name;
                     if (sourceNode.Source is SingleNavigationNode)
                     {
                         var rootNode = sourceNode.Source as SingleNavigationNode;
-                        rootPropertyName = ((dynamic)(rootNode.EntityTypeReference.Definition)).Name;
+                        rootPropertyName = rootNode.NavigationProperty.Name;
                     }
                 }
 
@@ -109,7 +109,7 @@ namespace ODataSample.Services
 
             var rightExpression = (expression.Right as ConstantNode).LiteralText;
 
-            var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName);
+            var mappedPropertyName = _fieldMapper.Map(propertyName, parentPropertyName, rootPropertyName);
             var lamdaProperty = node.Kind == QueryNodeKind.Any ? "any" : "all";
             var expressionFormat = $"{mappedPropertyName}/{lamdaProperty}({alias}: {alias} eq {rightExpression})";
             return expressionFormat;
@@ -155,16 +155,28 @@ namespace ODataSample.Services
             var rightNode = expression.Right as ConstantNode;
 
             string sourceName = string.Empty;
+            string rootPropertyName = string.Empty;
             if (leftNode.Source is SingleNavigationNode)
             {
-                sourceName = ((dynamic)(leftNode.Source as SingleNavigationNode).EntityTypeReference.Definition).Name;
+                var sourceNode = leftNode.Source as SingleNavigationNode;
+                sourceName = (leftNode.Source as SingleNavigationNode).NavigationProperty.Name;
+                if (sourceNode is SingleNavigationNode)
+                {
+                    rootPropertyName = (sourceNode.Source as SingleNavigationNode).NavigationProperty.Name;
+                }
             }
             if (leftNode.Source is SingleValuePropertyAccessNode)
             {
+                var sourceNode = leftNode.Source as SingleValuePropertyAccessNode;
                 sourceName = (leftNode.Source as SingleValuePropertyAccessNode).Property.Name;
+                if (sourceNode.Source is SingleValuePropertyAccessNode)
+                {
+                    rootPropertyName = (sourceNode.Source as SingleValuePropertyAccessNode).Property.Name;
+                }
             }
 
-            var docName = _fieldMapper.Map(leftNode.Property.Name, sourceName);
+
+            var docName = _fieldMapper.Map(leftNode.Property.Name, sourceName, rootPropertyName);
             var val = rightNode.LiteralText;
             var op = expression.OperatorKind;
 

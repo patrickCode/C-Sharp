@@ -4,6 +4,7 @@ using ODataSample.Models.EDM;
 using ODataSample.Services;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.OData;
 using System.Web.Http.OData.Query;
 
 namespace ODataSample.Controllers
@@ -25,8 +26,8 @@ namespace ODataSample.Controllers
 
             var fieldMapper = new ProductFieldMapper();
             var productEdmModel = Product.GetEdmModel();
-            var productDocsEdmModel = ProductDocEdm.GetProductsModel();
-            _oDataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDocEdm), fieldMapper);
+            var productDocsEdmModel = ProductDoc.GetProductsModel();
+            _oDataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDoc), fieldMapper);
         }
 
         [HttpGet]
@@ -39,10 +40,8 @@ namespace ODataSample.Controllers
                 AllowedFunctions = AllowedFunctions.Any | AllowedFunctions.All
             };
             options.Validate(settings);
-
             //Convert the filter to flattened model
             var converterFilterOption = _oDataConverter.Convert(options.Filter);
-            
 
             return _queryService.Get();
         }

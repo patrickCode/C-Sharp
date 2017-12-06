@@ -2,6 +2,6 @@
 {
     public interface IFieldMapper
     {
-        string Map(string propertyName, string parentPropertyName);
+        string Map(string propertyName, string parentPropertyName, string rootPath);
     }
 }
