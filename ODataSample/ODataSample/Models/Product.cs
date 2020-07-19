@@ -22,6 +22,8 @@ namespace ODataSample.Models
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Product>("Product");
+            builder.AddEntity(typeof(Details));
+            builder.AddEntity(typeof(Language));
             return builder.GetEdmModel();
         }
     }

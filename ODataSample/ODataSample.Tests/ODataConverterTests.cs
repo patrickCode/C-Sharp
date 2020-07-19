@@ -18,8 +18,8 @@ namespace ODataSample.Tests
         {
             _fieldMapper = new ProductFieldMapper();
             var productEdmModel = Product.GetEdmModel();
-            var productDocsEdmModel = ProductDocEdm.GetProductsModel();
-            _odataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDocEdm), _fieldMapper);
+            var productDocsEdmModel = ProductDoc.GetProductsModel();
+            _odataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDoc), _fieldMapper);
         }
 
         #region Single Expression
@@ -901,7 +901,7 @@ namespace ODataSample.Tests
 
             var fakeFieldMapper = new StubIFieldMapper()
             {
-                MapStringString = (productPropertyName, propertyParentName) =>
+                MapStringStringString = (productPropertyName, propertyParentName, root) =>
                 {
                     if (productPropertyName == "Id")
                         return "Id";
@@ -913,8 +913,8 @@ namespace ODataSample.Tests
                 }
             };
             var productEdmModel = Product.GetEdmModel();
-            var productDocsEdmModel = ProductDocEdm.GetProductsModel();
-            _odataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDocEdm), fakeFieldMapper);
+            var productDocsEdmModel = ProductDoc.GetProductsModel();
+            _odataConverter = new ODataConverter(productEdmModel, typeof(Product), productDocsEdmModel, typeof(ProductDoc), fakeFieldMapper);
             var convertedExpression = _odataConverter.Convert(originalExpression);
         }
         #endregion

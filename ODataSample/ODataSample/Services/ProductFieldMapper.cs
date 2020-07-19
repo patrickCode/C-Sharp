@@ -4,7 +4,7 @@ namespace ODataSample.Services
 {
     public class ProductFieldMapper: IFieldMapper
     {
-        public string Map(string productPropertyName, string propertyParentName)
+        public string Map(string productPropertyName, string propertyParentName, string rootProperyPath)
         {
             //TODO - Remove property naming and use OData references
             if (productPropertyName == "Id") //Bad Practice - Not considering the parent name
@@ -17,11 +17,11 @@ namespace ODataSample.Services
                 return "DetailsDescription";
             if (productPropertyName == "Description" && string.IsNullOrEmpty(propertyParentName))
                 return "ShortDescription";
-            if (productPropertyName == "Name" && (propertyParentName == "Language" || propertyParentName == "Lang"))
+            if (productPropertyName == "Name" && propertyParentName == "Lang" && rootProperyPath == "Details")
                 return "DescriptionLanguageName";
-            if (productPropertyName == "Name" && (propertyParentName == "Reference" || propertyParentName == "References"))
+            if (productPropertyName == "Name" && propertyParentName == "References" && rootProperyPath == "Details")
                 return "DetailReferenceNames";
-            if (productPropertyName == "Name" && (propertyParentName == "OrderLine" || propertyParentName == "OrderLines"))
+            if (productPropertyName == "Name" && propertyParentName == "OrderLines")
                 return "OrderLines";
 
             return "";

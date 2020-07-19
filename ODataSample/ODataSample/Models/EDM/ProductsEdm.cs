@@ -4,7 +4,7 @@ using System.Web.Http.OData.Builder;
 
 namespace ODataSample.Models.EDM
 {
-    public class ProductDocEdm
+    public class ProductDoc
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace ODataSample.Models.EDM
         public static IEdmModel GetProductsModel()
         {   
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<ProductDocEdm>("ProductsEdm");
+            builder.EntitySet<ProductDoc>("ProductsEdm");
             return builder.GetEdmModel();
         }
     }
