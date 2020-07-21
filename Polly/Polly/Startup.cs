@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +25,39 @@ namespace PollySample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(GetRegistry());
+
+            IAsyncPolicy<HttpResponseMessage> httpRetryPolicy =
+                Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                .RetryAsync(3);
+
+            IAsyncPolicy<HttpResponseMessage> noPolicy =
+                Policy.NoOpAsync<HttpResponseMessage>();
+
+            // Polly Single Policy
+            //services.AddHttpClient("RemoteServer", client =>
+            //{
+            //    client.BaseAddress = new Uri("https://localhost:44363/");
+            //    client.DefaultRequestHeaders.Add("Accept", "application/json");
+            //}).AddPolicyHandler(httpRetryPolicy);
+
+            IPolicyRegistry<string> registry = services.AddPolicyRegistry();
+            registry.Add("SimpleRetry", httpRetryPolicy);
+            registry.Add("NoOp", noPolicy);
+
+            services.AddHttpClient("RemoteServer", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44363/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            }).AddPolicyHandlerFromRegistry(PolicySelector);
+
             services.AddControllers();
+        }
+
+        private IAsyncPolicy<HttpResponseMessage> PolicySelector(IReadOnlyPolicyRegistry<string> policyRegistry, HttpRequestMessage request)
+        {
+            if (request.Method == HttpMethod.Get)
+                return policyRegistry.Get<IAsyncPolicy<HttpResponseMessage>>("SimpleRetry");
+            return policyRegistry.Get<IAsyncPolicy<HttpResponseMessage>>("NoOp");
         }
 
         private PolicyRegistry GetRegistry()

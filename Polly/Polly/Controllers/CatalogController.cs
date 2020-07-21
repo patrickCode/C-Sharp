@@ -38,8 +38,12 @@ namespace PollySample.Controllers
         private static readonly AsyncBulkheadPolicy<HttpResponseMessage> _bulkHeadPolicy =
             Policy.BulkheadAsync<HttpResponseMessage>(2, 4, onBulkheadRejectedAsync: (context) => { Debug.WriteLine("Bulkhead rejected"); return Task.CompletedTask; });
 
-        public CatalogController()
+        private IHttpClientFactory _httpClientFactory;
+
+        public CatalogController(IHttpClientFactory clientFactory)
         {
+            _httpClientFactory = clientFactory;
+
             _httpRetryPolicy = Policy.HandleResult<HttpResponseMessage>(result => result.StatusCode == System.Net.HttpStatusCode.InternalServerError)
                 .Or<TimeoutRejectedException>()
                 .RetryAsync(3);
@@ -146,6 +150,16 @@ namespace PollySample.Controllers
 
             var response = await _bulkHeadPolicy.ExecuteAsync(() => httpClient.GetAsync($"api/inventories/{productId}"));
 
+            var result = await response.Content.ReadAsStringAsync();
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet]
+        [Route("api/products_alt_3/{productId}")]
+        public async Task<IActionResult> GetProduct_Alt_3(int productId)
+        {
+            var httpClient = _httpClientFactory.CreateClient("RemoteServer");
+            var response = await httpClient.GetAsync($"api/inventories/{productId}"); // Polly policies are injected from Startup
             var result = await response.Content.ReadAsStringAsync();
             return new OkObjectResult(result);
         }
