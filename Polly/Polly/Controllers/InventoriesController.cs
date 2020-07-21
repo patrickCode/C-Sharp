@@ -16,6 +16,12 @@ namespace PollySample.Controllers
         {
             if (productId == "3")
                 Task.Delay(2000).Wait();
+            if (productId == "5")
+            {
+                Task.Delay(10000).Wait();
+                return new OkObjectResult("Result");
+            }
+                
             _counter++;
             if (_counter % 4 == 0)
                 return new OkObjectResult("Result");
